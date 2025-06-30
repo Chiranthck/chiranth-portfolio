@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiranth K - Engineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            background-color: #667eea;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
+        }
+
+        .project-image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .project-card:hover .project-image-text {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: #f0f4ff;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-button {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-button:hover {
+            background: #5a6fd8;
+        }
+
+        /* Image Upload Section */
+        .image-upload-section {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 8px;
+            border: 2px solid #f0f4ff;
+        }
+
+        .upload-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .image-upload-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .upload-image-btn, .save-image-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .upload-image-btn:hover, .save-image-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .save-image-btn {
+            background: #28a745;
+        }
+
+        .save-image-btn:hover {
+            background: #218838;
+        }
+
+        .upload-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .image-slot {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .image-slot:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .image-slot.has-image {
+            border: 2px solid #667eea;
+        }
+
+        .image-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .image-placeholder {
+            color: #999;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            display: none;
+        }
+
+        .image-slot.has-image .remove-btn {
+            display: block;
+        }
+
+        /* Media Links Section */
+        .media-links {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+
+        .media-links h5 {
+            color: #667eea;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .media-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.85rem;
+            margin: 0.25rem 0.5rem 0.25rem 0;
+            border: 1px solid #e0e6ff;
+            transition: all 0.3s ease;
+        }
+
+        .media-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .media-link.disabled {
+            background: #f0f0f0;
+            color: #999;
+            cursor: not-allowed;
+            font-style: italic;
+        }
+
+        .media-link.disabled:hover {
+            background: #f0f0f0;
+            color: #999;
+            transform: none;
+        }
+
+        .link-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .link-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .link-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .link-input button {
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .link-input button:hover {
+            background: #5a6fd8;
+        }
+
+        .edit-links-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .edit-links-btn:hover {
+            background: #218838;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: #f8f9ff;
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill {
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 3% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            padding-right: 40px;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f4ff;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            background-color: #667eea;
+            margin: 1rem auto;
+        }
+
+        .modal-links-section {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .modal-links-section h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .modal-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .modal-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #e0e6ff;
+            transition: all 0.3s ease;
+        }
+
+        .modal-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-link-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            color: #999;
+            border: 1px solid #ddd;
+            font-style: italic;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .modal-links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Chiranth K - Portfolio</div>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><button id="fullscreen-btn" onclick="toggleFullscreen()" style="background: none; border: 1px solid #667eea; color: #667eea; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-size: 0.9rem;">⛶ Fullscreen</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Engineering Innovation Portfolio</h1>
+                <p>Showcasing systematic problem-solving through Design of Experiments, IoT Development, and Engineering Analysis</p>
+                <a href="javascript:void(0)" class="cta-button" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">View My Projects</a>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                
+                <div class="projects-grid">
+                    <!-- Maruti 800 Project -->
+                    <div class="project-card">
+                        <div class="project-image" id="maruti-main-image">
+                            <div class="project-image-text">View Project Details</div>
+                            <span>🚗 Maruti 800 Electrical System</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Mock Layout of Car Electrical System - Maruti 800</h3>
+                            <p class="project-description">
+                                Comprehensive physical layout demonstrating automotive electrical system interconnections 
+                                including battery, alternator, starter motor, lighting systems, and control modules with 
+                                proper wiring standards and component integration.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Automobile Engineering</span>
+                                <span class="tag">Electrical Systems</span>
+                                <span class="tag">Wiring Standards</span>
+                                <span class="tag">System Integration</span>
+                            </div>
+                            <a href="javascript:void(0)" class="project-button" onclick="openModal('maruti')">View Details</a>
+                            
+                            <!-- Final Result Image Upload -->
+                            <div class="image-upload-section">
+                                <div class="upload-title">📸 Final Project Result</div>
+                                <div class="image-slot" data-project="maruti" onclick="selectImage('maruti')">
+                                    <div class="image-placeholder">Click to upload your final project image<br><small>This will be displayed on the card and modal</small></div>
+                                    <button class="remove-btn" onclick="event.stopPropagation(); removeImage('maruti')">×</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Media Links -->
+                            <div class="media-links">
+                                <h5>📂 Project Media & Documentation</h5>
+                                <button class="edit-links-btn" onclick="toggleEditMode('maruti')">✏️ Edit Links</button>
+                                
+                                <div id="maruti-links-display">
+                                    <a href="#" class="media-link disabled" id="maruti-gallery-link">
+                                        📸 Complete Photo Gallery - Click edit to add link
+                                    </a>
+                                    <a href="#" class="media-link disabled" id="maruti-video-link">
+                                        🎥 Project Demo Video - Click edit to add link
+                                    </a>
+                                    <a href="#" class="media-link disabled" id="maruti-docs-link">
+                                        📋 Technical Documentation - Click edit to add link
+                                    </a>
+                                </div>
+                                
+                                <div id="maruti-links-edit" class="link-input-group" style="display: none;">
+                                    <div class="link-input">
+                                        <span>📸</span>
+                                        <input type="url" id="maruti-gallery-input" placeholder="Paste Google Drive link for photo gallery">
+                                        <button onclick="saveLink('maruti', 'gallery')">Save</button>
+                                    </div>
+                                    <div class="link-input">
+                                        <span>🎥</span>
+                                        <input type="url" id="maruti-video-input" placeholder="Paste Google Drive link for demo video">
+                                        <button onclick="saveLink('maruti', 'video')">Save</button>
+                                    </div>
+                                    <div class="link-input">
+                                        <span>📋</span>
+                                        <input type="url" id="maruti-docs-input" placeholder="Paste Google Drive link for documentation">
+                                        <button onclick="saveLink('maruti', 'docs')">Save</button>
+                                    </div>
+                                    <button onclick="toggleEditMode('maruti')" style="margin-top: 0.5rem; background: #6c757d;">Done Editing</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Radish Optimization Project -->
+                    <div class="project-card">
+                        <div class="project-image" id="radish-main-image">
+                            <div class="project-image-text">View Project Details</div>
+                            <span>🌱 Radish Yield Optimization</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Taguchi-Grey Relational Analysis for Radish Yield Optimization</h3>
+                            <p class="project-description">
+                                Applied Design of Experiments methodology using Taguchi's Orthogonal Arrays and 
+                                Grey Relational Analysis to optimize radish cultivation, identifying optimal 
+                                combination of seed variety, irrigation method, and manure type.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Design of Experiments</span>
+                                <span class="tag">Statistical Analysis</span>
+                                <span class="tag">Agricultural Engineering</span>
+                                <span class="tag">Data Optimization</span>
+                            </div>
+                            <a href="javascript:void(0)" class="project-button" onclick="openModal('radish')">View Details</a>
+                            
+                            <!-- Final Result Image Upload -->
+                            <div class="image-upload-section">
+                                <div class="upload-title">📸 Final Project Result</div>
+                                <div class="image-slot" data-project="radish" onclick="selectImage('radish')">
+                                    <div class="image-placeholder">Click to upload your final project image<br><small>This will be displayed on the card and modal</small></div>
+                                    <button class="remove-btn" onclick="event.stopPropagation(); removeImage('radish')">×</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Media Links -->
+                            <div class="media-links">
+                                <h5>📂 Project Media & Documentation</h5>
+                                <button class="edit-links-btn" onclick="toggleEditMode('radish')">✏️ Edit Links</button>
+                                
+                                <div id="radish-links-display">
+                                    <a href="#" class="media-link disabled" id="radish-gallery-link">
+                                        📸 Experimental Setup Photos - Click edit to add link
+                                    </a>
+                                    <a href="#" class="media-link disabled" id="radish-video-link">
+                                        🎥 Process Documentation Video - Click edit to add link
+                                    </a>
+                                    <a href="#" class="media-link disabled" id="radish-docs-link">
+                                        📊 Statistical Analysis Data - Click edit to add link
+                                    </a>
+                                </div>
+                                
+                                <div id="radish-links-edit" class="link-input-group" style="display: none;">
+                                    <div class="link-input">
+                                        <span>📸</span>
+                                        <input type="url" id="radish-gallery-input" placeholder="Paste Google Drive link for experimental photos">
+                                        <button onclick="saveLink('radish', 'gallery')">Save</button>
+                                    </div>
+                                    <div class="link-input">
+                                        <span>🎥</span>
+                                        <input type="url" id="radish-video-input" placeholder="Paste Google Drive link for process video">
+                                        <button onclick="saveLink('radish', 'video')">Save</button>
+                                    </div>
+                                    <div class="link-input">
+                                        <span>📊</span>
+                                        <input type="url" id="radish-docs-input" placeholder="Paste Google Drive link for analysis data">
+                                        <button onclick="saveLink('radish', 'docs')">Save</button>
+                                    </div>
+                                    <button onclick="toggleEditMode('radish')" style="margin-top: 0.5rem; background: #6c757d;">Done Editing</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fire Protection Device -->
+                    <div class="project-card">
+                        <div class="project-image" id="fire-main-image">
+                            <div class="project-image-text">View Project Details</div>
+                            <span>🔥 IoT Fire Protection System</span>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Functional Prototype of Modular IoT-Enabled Fire Protection Device</h3>
+                            <p class="project-description">
+                                Developed autonomous fire protection system integrating real-time detection, 
+                                directional water suppression, and remote alerting in a self-contained unit 
+                                for infrastructure-limited environments.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">IoT Development</span>
+                                <span class="tag">Automation</span>
+                                <span class="tag">Fire Safety</span>
+                                <span class="tag">Raspberry Pi</span>
+                                <span class="tag">Sensor Integration</span>
+                            </div>
+                            <a href="javascript:void(0)" class="project-button" onclick="openModal('fire')">View Details</a>
+                            
+                            <!-- Final Result Image Upload -->
+                            <div class="image-upload-section">
+                                <div class="upload-title">📸 Final Project Result</div>
+                                <div class="image-slot" data-project="fire" onclick="selectImage('fire')">
+                                    <div class="image-placeholder">Click to upload your final project image<br><small>This will be displayed on the card and modal</small></div>
+                                    <button class="remove-btn" onclick="event.stopPropagation(); removeImage('fire')">×</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Media Links -->
+                            <div class="media-links">
+                                <h5>📂 Project Media & Documentation</h5>
+                                <button class="edit-links-btn" onclick="toggleEditMode('fire')">✏️ Edit Links</button>
+                                
+                                <div id="fire-links-display">
+                                    <a href="#" class="media-link disabled" id="fire-gallery-link">
+                                        📸 Prototype Development Photos - Click edit to add link
+                                    </a>
+                                    <a href="#" class="media-link disabled" id="fire-docs-link">
+                                        🔧 Technical Specifications - Click edit to add link
+                                    </a>
+                                </div>
+                                
+                                <div id="fire-links-edit" class="link-input-group" style="display: none;">
+                                    <div class="link-input">
+                                        <span>📸</span>
+                                        <input type="url" id="fire-gallery-input" placeholder="Paste Google Drive link for prototype photos">
+                                        <button onclick="saveLink('fire', 'gallery')">Save</button>
+                                    </div>
+                                    <div class="link-input">
+                                        <span>🎥</span>
+                                        <input type="url" id="fire-video-input" placeholder="Paste Google Drive link for demo video">
+                                        <button onclick="saveLink('fire', 'video')">Save</button>
+                                    </div>
+                                    <div class="link-input">
+                                        <span>🔧</span>
+                                        <input type="url" id="fire-docs-input" placeholder="Paste Google Drive link for technical specs">
+                                        <button onclick="saveLink('fire', 'docs')">Save</button>
+                                    </div>
+                                    <button onclick="toggleEditMode('fire')" style="margin-top: 0.5rem; background: #6c757d;">Done Editing</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <p class="about-text">
+                        I am an engineering student passionate about applying systematic methodologies 
+                        to solve real-world problems. My projects demonstrate proficiency in experimental 
+                        design, statistical analysis, IoT development, and practical implementation across 
+                        diverse engineering domains.
+                    </p>
+                    <p class="about-text">
+                        Through hands-on research, data-driven approaches, and innovative technology solutions,
+                        I aim to contribute to sustainable engineering solutions that make a meaningful impact 
+                        on society and public safety.
+                    </p>
+                    <div class="skills">
+                        <span class="skill">Design of Experiments</span>
+                        <span class="skill">IoT Development</span>
+                        <span class="skill">Statistical Analysis</span>
+                        <span class="skill">Electrical Systems</span>
+                        <span class="skill">Automation</span>
+                        <span class="skill">Data Optimization</span>
+                        <span class="skill">Research Methodology</span>
+                        <span class="skill">Technical Documentation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Maruti 800 Modal -->
+    <div id="marutiModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('maruti')">&times;</span>
+            <h2>Mock Layout of Car Electrical System - Maruti 800</h2>
+            
+            <div class="modal-section">
+                <h3>Final Project Result</h3>
+                <div class="modal-main-image" id="maruti-modal-image">
+                    🚗 Upload your final project image to see it here
+                </div>
+            </div>
+            
+            <div class="modal-links-section">
+                <h4>📂 Complete Project Media & Documentation</h4>
+                <div class="modal-links-grid">
+                    <a href="#" class="modal-link-placeholder" id="maruti-modal-gallery">
+                        <span>📸</span>
+                        <div>
+                            <strong>Circuit Diagrams & Assembly</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-link-placeholder" id="maruti-modal-video">
+                        <span>🎥</span>
+                        <div>
+                            <strong>Project Demo Video</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-link-placeholder" id="maruti-modal-docs">
+                        <span>📋</span>
+                        <div>
+                            <strong>Technical Documentation</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Project Overview</h3>
+                <p>Designed and constructed a comprehensive mock layout of the Maruti 800 car electrical system, 
+                demonstrating the interconnection of key automotive components including battery, alternator, 
+                starter motor, lighting systems, and control modules. This project showcased technical proficiency 
+                in automotive electrical engineering principles and system integration.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Key Components Implemented</h3>
+                <ul>
+                    <li><strong>Power Generation & Storage:</strong> Battery, Generator Assembly, Alternator</li>
+                    <li><strong>Engine Systems:</strong> Starter Motor Assembly, Distributor, Spark Plug</li>
+                    <li><strong>Lighting Systems:</strong> Headlights, Tail Lamps, Indicators, Interior Lighting</li>
+                    <li><strong>Control Systems:</strong> Combination Switch, Steering Lock, Relays</li>
+                    <li><strong>Monitoring:</strong> Fuel Gauge Assembly, Multi-meter</li>
+                    <li><strong>Safety Systems:</strong> Horn, Wiper Motor</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Learning Outcomes & Skills Demonstrated</h3>
+                <ul>
+                    <li>Automotive electrical system design and integration</li>
+                    <li>Understanding of electrical circuit analysis and troubleshooting</li>
+                    <li>Knowledge of automotive wiring standards and color coding</li>
+                    <li>Component specification and selection for automotive applications</li>
+                    <li>Physical layout design and space optimization</li>
+                    <li>Project management and team collaboration</li>
+                    <li>Technical documentation and presentation skills</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Radish Project Modal -->
+    <div id="radishModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('radish')">&times;</span>
+            <h2>Taguchi-Grey Relational Analysis for Radish Yield Optimization</h2>
+            
+            <div class="modal-section">
+                <h3>Final Project Result</h3>
+                <div class="modal-main-image" id="radish-modal-image">
+                    🌱 Upload your final project image to see it here
+                </div>
+            </div>
+            
+            <div class="modal-links-section">
+                <h4>📂 Complete Project Media & Documentation</h4>
+                <div class="modal-links-grid">
+                    <a href="#" class="modal-link-placeholder" id="radish-modal-gallery">
+                        <span>📸</span>
+                        <div>
+                            <strong>Experimental Setup & Process</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-link-placeholder" id="radish-modal-video">
+                        <span>🎥</span>
+                        <div>
+                            <strong>Process Documentation Video</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-link-placeholder" id="radish-modal-docs">
+                        <span>📊</span>
+                        <div>
+                            <strong>Statistical Analysis & Data</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Project Overview</h3>
+                <p>Applied Design of Experiments (DOE) methodology using Taguchi's Orthogonal Arrays and Grey 
+                Relational Analysis to systematically optimize radish cultivation. Successfully identified the 
+                optimal combination of factors (Trusted Seeds + Drip Irrigation + DAP Manure) that maximizes 
+                crop yield while minimizing resource usage.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Experimental Factors</h3>
+                <p><strong>Factor A - Seed Variety (3 levels):</strong></p>
+                <ul>
+                    <li>Sungro Seeds</li>
+                    <li>Trusted Seeds</li>
+                    <li>Keyonic Seeds</li>
+                </ul>
+
+                <p><strong>Factor B - Irrigation Method (2 levels):</strong></p>
+                <ul>
+                    <li>Drip Irrigation</li>
+                    <li>Sprinkler Irrigation</li>
+                </ul>
+
+                <p><strong>Factor C - Manure Type (3 levels):</strong></p>
+                <ul>
+                    <li>DAP (Diammonium Phosphate)</li>
+                    <li>20-20-20 NPK</li>
+                    <li>Organic Manure</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Key Results & Achievements</h3>
+                <p><strong>Optimal Combination Identified:</strong></p>
+                <ul>
+                    <li>Seed: Trusted Seeds</li>
+                    <li>Irrigation: Drip Irrigation</li>
+                    <li>Manure: DAP</li>
+                </ul>
+
+                <p><strong>Performance Metrics:</strong></p>
+                <ul>
+                    <li>Average Length: 14.75 cm</li>
+                    <li>Quantity: 35.5 units</li>
+                    <li>Weight: 2.25 kg</li>
+                    <li>Grey Relational Grade: 0.8397 (highest among all treatments)</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Location & Setup</h3>
+                <p><strong>Location:</strong> Mandya District, KR Pete Taluk, Kikkeri Hobli, Echalaguday, Karnataka</p>
+                <p><strong>Soil Conditions:</strong> Red loamy, sandy and black mix soil</p>
+                <p><strong>Climate:</strong> 6-8 hours sun exposure, 30°C average temperature</p>
+                <p><strong>Plot Design:</strong> 18 plots (5ft × 5ft each) with randomized treatment allocation</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Impact & Applications</h3>
+                <ul>
+                    <li>Provides farmers with data-driven guidance for maximizing radish yield</li>
+                    <li>Demonstrates practical application of DOE in agriculture</li>
+                    <li>Reduces resource waste through systematic optimization</li>
+                    <li>Promotes sustainable farming practices</li>
+                    <li>Methodology applicable to other crop optimization studies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fire Protection Device Modal -->
+    <div id="fireModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('fire')">&times;</span>
+            <h2>Functional Prototype of Modular IoT-Enabled Fire Protection Device</h2>
+            
+            <div class="modal-section">
+                <h3>Final Project Result</h3>
+                <div class="modal-main-image" id="fire-modal-image">
+                    🔥 Upload your final project image to see it here
+                </div>
+            </div>
+            
+            <div class="modal-links-section">
+                <h4>📂 Complete Project Media & Documentation</h4>
+                <div class="modal-links-grid">
+                    <a href="#" class="modal-link-placeholder" id="fire-modal-gallery">
+                        <span>📸</span>
+                        <div>
+                            <strong>Prototype Development Photos</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-link-placeholder" id="fire-modal-video">
+                        <span>🎥</span>
+                        <div>
+                            <strong>System Demo & Testing Video</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                    <a href="#" class="modal-link-placeholder" id="fire-modal-docs">
+                        <span>🔧</span>
+                        <div>
+                            <strong>Technical Specifications</strong><br>
+                            <small>Click "Edit Links" in the project card to add Google Drive link</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Project Overview</h3>
+                <p>Developed a functional prototype of a modular, IoT-enabled fire protection device that integrates 
+                real-time fire detection, directional water-based suppression, and remote alerting within a 
+                self-contained unit. Designed specifically for infrastructure-limited, high-risk environments 
+                such as large outdoor event spaces where traditional fire safety systems are inadequate.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Technical Architecture & Components</h3>
+                <p><strong>Physical Structure:</strong></p>
+                <ul>
+                    <li>Cylindrical main structure (20" diameter, 60" height) with 360° access capability</li>
+                    <li>Rectangular base (30" × 23" × 11") housing 50L integrated water storage</li>
+                    <li>MS Steel construction (1.5-2mm thickness) with maintenance access doors</li>
+                </ul>
+
+                <p><strong>Detection System:</strong></p>
+                <ul>
+                    <li>5 IR Flame Sensors providing 180° coverage with 80cm detection radius</li>
+                    <li>Heat/flame detection with alert capabilities</li>
+                    <li>Multi-sensor triangulation for fire location determination</li>
+                </ul>
+
+                <p><strong>Suppression System:</strong></p>
+                <ul>
+                    <li>Dual-action approach: Water spray + Fire extinguisher ball launcher</li>
+                    <li>1HP Sharp Self-Priming Pump (3-4 kg/cm² pressure, 50 LPM flow)</li>
+                    <li>Directional water nozzles with 25-30 feet spray distance</li>
+                    <li>Air cannon system for fire extinguisher ball deployment</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>System Operation & Functionality</h3>
+                <p><strong>Detection Phase:</strong></p>
+                <ul>
+                    <li>Continuous environmental monitoring through strategic sensor placement</li>
+                    <li>IR radiation threshold detection with verification protocols</li>
+                    <li>False alarm prevention through multi-sensor verification</li>
+                </ul>
+
+                <p><strong>Alert & Targeting Phase:</strong></p>
+                <ul>
+                    <li>LED status indicators (Green→Yellow→Red progression)</li>
+                    <li>Audible buzzer activation for occupant notification</li>
+                    <li>GSM module sends SMS alerts with location and timestamp</li>
+                    <li>Automatic platform positioning toward detected fire direction</li>
+                </ul>
+
+                <p><strong>Suppression Phase:</strong></p>
+                <ul>
+                    <li>Coordinated platform rotation and nozzle elevation for optimal targeting</li>
+                    <li>Water pump activation through SSR relay control</li>
+                    <li>Regulated water flow with servo-controlled valve system</li>
+                    <li>Continuous operation until manual reset or water depletion</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Industry Collaboration</h3>
+                <p><strong>Industry Partner:</strong> Vision Safety India (Verna, Goa)</p>
+                <p><strong>About Vision Safety India:</strong> Professional safety equipment supplier specializing 
+                in Marine Safety, Industrial Safety, Fire Safety Consultancy, and Workplace Breathing Air Solutions.</p>
+                
+                <p><strong>Project Investment:</strong> ₹15,670 total cost</p>
+                <ul>
+                    <li>Structural & Mechanical Materials: ₹5,782</li>
+                    <li>Electronics & Control Systems: ₹5,968</li>
+                    <li>Adhesives & Bonding Agents: ₹1,020</li>
+                    <li>Tools & Equipment: ₹2,500</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Results & Applications</h3>
+                <p><strong>Successful Demonstrations:</strong></p>
+                <ul>
+                    <li>Real-time fire detection within 80cm radius</li>
+                    <li>Automated targeting and platform positioning</li>
+                    <li>Effective water delivery at 20-25 meter range</li>
+                    <li>Coordinated system operation from detection to suppression</li>
+                    <li>IoT connectivity and remote alerting functionality</li>
+                </ul>
+
+                <p><strong>Potential Applications:</strong></p>
+                <ul>
+                    <li>Warehouse protection with targeted suppression</li>
+                    <li>Temporary installation for outdoor events</li>
+                    <li>Commercial kitchens and workshops requiring rapid response</li>
+                    <li>Rural areas lacking traditional fire protection infrastructure</li>
+                    <li>Scalable network deployment for large-area coverage</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Storage for final project images and Google Drive links
+        let projectImages = {
+            maruti: null,
+            radish: null,
+            fire: null
+        };
+
+        let projectImageUrls = {
+            maruti: '',
+            radish: '',
+            fire: ''
+        };
+
+        let projectLinks = {
+            maruti: { gallery: '', video: '', docs: '' },
+            radish: { gallery: '', video: '', docs: '' },
+            fire: { gallery: '', video: '', docs: '' }
+        };
+
+        // Handle image selection for final result
+        function selectImage(project) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        // Store image data
+                        projectImages[project] = event.target.result;
+                        
+                        // Save to localStorage
+                        saveImagesToStorage();
+                        
+                        // Update the upload slot
+                        updateImageSlot(project, event.target.result);
+                        
+                        // Update main project card image
+                        updateMainProjectImage(project, event.target.result);
+                        
+                        // Update modal image
+                        updateModalImage(project, event.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        }
+
+        // Update image slot
+        function updateImageSlot(project, imageSrc) {
+            const slot = document.querySelector(`[data-project="${project}"]`);
+            if (slot) {
+                slot.innerHTML = `
+                    <img src="${imageSrc}" alt="Final Project Result">
+                    <button class="remove-btn" onclick="event.stopPropagation(); removeImage('${project}')">×</button>
+                `;
+                slot.classList.add('has-image');
+            }
+        }
+
+        // Update main project card image
+        function updateMainProjectImage(project, imageSrc) {
+            const mainImage = document.getElementById(`${project}-main-image`);
+            if (mainImage) {
+                mainImage.style.backgroundImage = `url(${imageSrc})`;
+                mainImage.innerHTML = '<div class="project-image-text">View Project Details</div>';
+            }
+        }
+
+        // Update modal image
+        function updateModalImage(project, imageSrc) {
+            const modalImage = document.getElementById(`${project}-modal-image`);
+            if (modalImage) {
+                modalImage.style.backgroundImage = `url(${imageSrc})`;
+                modalImage.textContent = '';
+            }
+        }
+
+        // Remove image
+        function removeImage(project) {
+            // Remove from storage
+            projectImages[project] = null;
+            
+            // Save to localStorage
+            saveImagesToStorage();
+            
+            // Reset image slot
+            const slot = document.querySelector(`[data-project="${project}"]`);
+            if (slot) {
+                slot.innerHTML = `
+                    <div class="image-placeholder">Click to upload your final project image<br><small>This will be displayed on the card and modal</small></div>
+                    <button class="remove-btn" onclick="event.stopPropagation(); removeImage('${project}')">×</button>
+                `;
+                slot.classList.remove('has-image');
+            }
+            
+            // Reset main project image
+            const mainImage = document.getElementById(`${project}-main-image`);
+            if (mainImage) {
+                mainImage.style.backgroundImage = '';
+                const icons = {
+                    maruti: '🚗 Maruti 800 Electrical System',
+                    radish: '🌱 Radish Yield Optimization',
+                    fire: '🔥 IoT Fire Protection System'
+                };
+                mainImage.innerHTML = `
+                    <div class="project-image-text">View Project Details</div>
+                    <span>${icons[project]}</span>
+                `;
+            }
+            
+            // Reset modal image
+            const modalImage = document.getElementById(`${project}-modal-image`);
+            if (modalImage) {
+                modalImage.style.backgroundImage = '';
+                const icons = {
+                    maruti: '🚗 Upload your final project image to see it here',
+                    radish: '🌱 Upload your final project image to see it here',
+                    fire: '🔥 Upload your final project image to see it here'
+                };
+                modalImage.textContent = icons[project];
+            }
+        }
+
+        // Toggle edit mode for links
+        function toggleEditMode(project) {
+            const displayDiv = document.getElementById(`${project}-links-display`);
+            const editDiv = document.getElementById(`${project}-links-edit`);
+            
+            if (editDiv.style.display === 'none') {
+                displayDiv.style.display = 'none';
+                editDiv.style.display = 'block';
+                
+                // Populate current values
+                document.getElementById(`${project}-gallery-input`).value = projectLinks[project].gallery;
+                document.getElementById(`${project}-video-input`).value = projectLinks[project].video;
+                document.getElementById(`${project}-docs-input`).value = projectLinks[project].docs;
+            } else {
+                displayDiv.style.display = 'block';
+                editDiv.style.display = 'none';
+            }
+        }
+
+        // Save individual link
+        function saveLink(project, type) {
+            const input = document.getElementById(`${project}-${type}-input`);
+            const url = input.value.trim();
+            
+            if (url && isValidUrl(url)) {
+                // Store the link
+                projectLinks[project][type] = url;
+                
+                // Update the display link
+                updateDisplayLink(project, type, url);
+                
+                // Update modal link
+                updateModalLink(project, type, url);
+                
+                // Save to localStorage
+                saveLinksToStorage();
+                
+                // Show success feedback
+                input.style.borderColor = '#28a745';
+                setTimeout(() => {
+                    input.style.borderColor = '#ddd';
+                }, 1000);
+            } else if (url === '') {
+                // Clear the link
+                projectLinks[project][type] = '';
+                updateDisplayLink(project, type, '');
+                updateModalLink(project, type, '');
+                saveLinksToStorage();
+            } else {
+                // Show error
+                input.style.borderColor = '#dc3545';
+                alert('Please enter a valid URL (must start with http:// or https://)');
+                setTimeout(() => {
+                    input.style.borderColor = '#ddd';
+                }, 2000);
+            }
+        }
+
+        // Validate URL
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return string.startsWith('http://') || string.startsWith('https://');
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Update display link
+        function updateDisplayLink(project, type, url) {
+            const linkElement = document.getElementById(`${project}-${type}-link`);
+            if (!linkElement) return;
+            
+            const linkTexts = {
+                gallery: {
+                    maruti: '📸 Complete Photo Gallery',
+                    radish: '📸 Experimental Setup Photos',
+                    fire: '📸 Prototype Development Photos'
+                },
+                video: {
+                    maruti: '🎥 Project Demo Video',
+                    radish: '🎥 Process Documentation Video',
+                    fire: '🎥 System Demo & Testing Video'
+                },
+                docs: {
+                    maruti: '📋 Technical Documentation',
+                    radish: '📊 Statistical Analysis Data',
+                    fire: '🔧 Technical Specifications'
+                }
+            };
+            
+            if (url && isValidUrl(url)) {
+                linkElement.href = url;
+                linkElement.target = '_blank';
+                linkElement.rel = 'noopener noreferrer';
+                linkElement.className = 'media-link';
+                linkElement.textContent = linkTexts[type][project];
+                
+                // Remove any event listeners that might conflict
+                linkElement.onclick = null;
+            } else {
+                linkElement.href = 'javascript:void(0)';
+                linkElement.removeAttribute('target');
+                linkElement.removeAttribute('rel');
+                linkElement.className = 'media-link disabled';
+                linkElement.textContent = linkTexts[type][project] + ' - Click edit to add link';
+                
+                // Prevent any default action for disabled links
+                linkElement.onclick = function(e) {
+                    e.preventDefault();
+                    return false;
+                };
+            }
+        }
+
+        // Update modal link
+        function updateModalLink(project, type, url) {
+            const modalElement = document.getElementById(`${project}-modal-${type}`);
+            if (modalElement) {
+                if (url) {
+                    modalElement.href = url;
+                    modalElement.target = '_blank';
+                    modalElement.rel = 'noopener noreferrer';
+                    modalElement.className = 'modal-link';
+                } else {
+                    modalElement.href = '#';
+                    modalElement.removeAttribute('target');
+                    modalElement.removeAttribute('rel');
+                    modalElement.className = 'modal-link-placeholder';
+                }
+            }
+        }
+
+        // Modal functionality
+        function openModal(projectId) {
+            const modal = document.getElementById(projectId + 'Modal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } else {
+                // If modal not found, try alternative approach
+                const alternativeModal = document.querySelector(`[id*="${projectId}"]`);
+                if (alternativeModal) {
+                    alternativeModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        }
+
+        function closeModal(projectId) {
+            const modal = document.getElementById(projectId + 'Modal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                // Only process if it's a valid hash link and not empty
+                if (href && href.length > 1 && href.startsWith('#')) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved images from localStorage
+            const savedImages = localStorage.getItem('portfolioImages');
+            if (savedImages) {
+                try {
+                    const images = JSON.parse(savedImages);
+                    Object.keys(images).forEach(project => {
+                        if (images[project]) {
+                            projectImages[project] = images[project];
+                            updateImageSlot(project, images[project]);
+                            updateMainProjectImage(project, images[project]);
+                            updateModalImage(project, images[project]);
+                        }
+                    });
+                } catch (e) {
+                    // Could not load saved images
+                }
+            }
+
+            // Load saved image URLs from localStorage
+            const savedImageUrls = localStorage.getItem('portfolioImageUrls');
+            if (savedImageUrls) {
+                try {
+                    const imageUrls = JSON.parse(savedImageUrls);
+                    projectImageUrls = { ...projectImageUrls, ...imageUrls };
+                } catch (e) {
+                    // Could not load saved image URLs
+                }
+            }
+
+            // Load saved links from localStorage
+            const savedLinks = localStorage.getItem('portfolioLinks');
+            if (savedLinks) {
+                try {
+                    const links = JSON.parse(savedLinks);
+                    projectLinks = { ...projectLinks, ...links };
+                    
+                    // Update all display links
+                    ['maruti', 'radish', 'fire'].forEach(project => {
+                        ['gallery', 'video', 'docs'].forEach(type => {
+                            if (projectLinks[project][type]) {
+                                updateDisplayLink(project, type, projectLinks[project][type]);
+                                updateModalLink(project, type, projectLinks[project][type]);
+                            }
+                        });
+                    });
+                } catch (e) {
+                    // Could not load saved links
+                }
+            }
+            
+            // Portfolio loaded successfully
+        });
+
+        // Save images to localStorage
+        function saveImagesToStorage() {
+            try {
+                localStorage.setItem('portfolioImages', JSON.stringify(projectImages));
+                localStorage.setItem('portfolioImageUrls', JSON.stringify(projectImageUrls));
+            } catch (e) {
+                // Could not save images to storage
+            }
+        }
+
+        // Save image as URL for persistence
+        function saveImageAsUrl(project) {
+            const currentImage = projectImages[project];
+            if (!currentImage) {
+                alert('Please upload an image first before saving as URL');
+                return;
+            }
+            
+            // Show URL input section
+            const urlSection = document.getElementById(`${project}-image-url`);
+            urlSection.style.display = 'block';
+            
+            alert('To make your image permanent:\n\n1. Go to imgbb.com (free, no signup needed)\n2. Upload your image\n3. Copy the "Direct link"\n4. Paste it below and click Load\n\nThis will make your image visible to admission committees!');
+        }
+
+        // Load image from URL
+        function loadImageFromUrl(project) {
+            const input = document.getElementById(`${project}-image-url-input`);
+            const url = input.value.trim();
+            
+            if (!url) {
+                alert('Please enter an image URL');
+                return;
+            }
+            
+            // Test if the URL is a valid image
+            const img = new Image();
+            img.onload = function() {
+                // Store the URL
+                projectImageUrls[project] = url;
+                projectImages[project] = url;
+                
+                // Update displays
+                updateImageSlot(project, url);
+                updateMainProjectImage(project, url);
+                updateModalImage(project, url);
+                
+                // Save to localStorage
+                saveImagesToStorage();
+                
+                // Hide URL section and show success
+                document.getElementById(`${project}-image-url`).style.display = 'none';
+                input.style.borderColor = '#28a745';
+                alert('✅ Image loaded successfully! This image will now persist across browsers.');
+                
+                setTimeout(() => {
+                    input.style.borderColor = '#ddd';
+                    input.value = '';
+                }, 2000);
+            };
+            
+            img.onerror = function() {
+                input.style.borderColor = '#dc3545';
+                alert('❌ Could not load image from this URL. Please check:\n• URL is correct\n• Image is publicly accessible\n• URL points directly to an image file');
+                setTimeout(() => {
+                    input.style.borderColor = '#ddd';
+                }, 2000);
+            };
+            
+            img.src = url;
+        }
+
+        // Save links to localStorage
+        function saveLinksToStorage() {
+            try {
+                localStorage.setItem('portfolioLinks', JSON.stringify(projectLinks));
+            } catch (e) {
+                // Could not save links to storage
+            }
+        }
+
+        // Fullscreen functionality
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Update fullscreen button text
+        document.addEventListener('fullscreenchange', function() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (document.fullscreenElement) {
+                btn.textContent = '⛶ Exit Fullscreen';
+            } else {
+                btn.textContent = '⛶ Fullscreen';
+            }
+        });
+    </script>
+</body>
+</html>System Demo & Testing Video - Click edit to add link
+                                    </a>
